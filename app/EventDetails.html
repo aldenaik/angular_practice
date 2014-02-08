@@ -11,17 +11,20 @@
 	<div class ="navbar">
 		<div class ="navbar-inner">
 			<ul class="nav">
+				<li><a href= "file:///Users/aldenaik/DevMtn/angular_practice/app/NewEvent.html">Create Event</a></li>
+				<li><a href= "file:///Users/aldenaik/DevMtn/angular_practice/app/EditProfile.html">Edit Profile</a></li>
+
 			</ul>
 		</div>
 	</div>
-
 	<div ng-controller="EventController" style="padding-left:20px; padding-right:20px">
 		<img ng-src="{{event.imageUrl}}" alt "{{event.name}}" />
 		<div class ="row">
 			<div class="spann11">
-				<h2>{{event.name}}</h2>
+				<h2 ng-style="myStyle" ng-bind-template= "{{event.name | uppercase}} {{event.date}}"> </h2>
 			</div>
 		</div>
+
 		<div class ="row">
 			<div class="spann3">
 				<div><strong>Date:</strong> {{event.date}}</div>
@@ -40,8 +43,19 @@
 
 			<h3>Sessions</h3>
 			<ul class = "thumbnails">
-				<li ng-repeat="session in event.sessions">
+				<li ng-repeat="session in event.sessions| orderBy:sortorder">
 					<div class="row session">
+						<div class = "span0 well votingWidget">
+							<div class ="votingButton" ng-click="upVoteSession(session)">
+								<i class = "icon-chevron-up icone-white"></i>
+							</div>
+							<div class = "badge badge-inverse">
+								<div>{{session.upVoteCount}}</div>
+							</div>
+							<div class = "votingButton"ng-click="downVoteSession(session)">
+								<i class = "icon-chevron-down" sty></i>
+							</div>
+						</div>
 						<div class="well span9">
 							<h4 class="well-title">{{session.name}}</h4>
 							<h6 style="margin-top:-10px">{{session.creator}}</h6>
@@ -60,8 +74,11 @@
 <script src="/Users/aldenaik/DevMtn/angular_practice/app/lib/underscore_1.5.2.js"></script>
 <script src="/Users/aldenaik/DevMtn/angular_practice/app/lib/bootstrap.min.js"></script>
 <script src="/Users/aldenaik/DevMtn/angular_practice/app/lib/angular/angular.js"></script>
+<script src="/Users/aldenaik/DevMtn/angular_practice/app/lib/angular/angular-resource.js"></script>
+<script src="/Users/aldenaik/DevMtn/angular_practice/app/lib/angular/angular-sanitize.js"></script>
 <script src="/Users/aldenaik/DevMtn/angular_practice/app/js/app.js"></script>
 <script src="/Users/aldenaik/DevMtn/angular_practice/app/js/controllers/EventController.js"></script>
+<script src="/Users/aldenaik/DevMtn/angular_practice/app/js/services/EventData.js"></script>
 
 </body>
 </html>
